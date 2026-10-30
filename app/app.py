@@ -17,7 +17,14 @@ def index():
         "hostname": os.uname().nodename,
         "visits": count
     })
+@app.route("/reset", methods=["POST"])
+def reset():
+    r.set("visits", 0)
 
+    return jsonify({
+        "message": "Visit counter reset successfully!",
+        "visits": 0
+    })
 @app.route("/health")
 def health():
     return jsonify({"status": "ok"})
